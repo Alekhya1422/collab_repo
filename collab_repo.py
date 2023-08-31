@@ -60,7 +60,10 @@ if st.button("Submit"):
         st.warning("Please fill in both your name and learning objectives.")
  #display ideas back to the user
 
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+@st.experimental_singleton
+def init_connection():
+return snowflake.connector.connect(**st.secrets[“snowflake”], client_session_keep_alive=True)
+conn = init_connection()
 
 
 st.divider()
