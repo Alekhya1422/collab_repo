@@ -50,10 +50,11 @@ if st.button("Submit"):
 
 st.divider()
 
+st.subheader('Peploe with Similar Interests:')
+
 if st.session_state.ideasList:
     st.title("Ideas")
     for idea in st.session_state.ideasList:
         st.write(idea)
 
-st.divider()
-st.subheader('Peploe with Similar Interests:')
+
