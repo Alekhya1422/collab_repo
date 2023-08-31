@@ -76,7 +76,7 @@ if st.button('Select a interested technology'):
   my_cnx.close()
   st.dataframe(my_data_rows) 
 
-list_tech = pd.DataFrame(my_data_rows, columns = ("technology_name"))
+list_tech = st.dataframe(my_data_rows, columns = ("technology_name"))
 list_tech.columns = [
     c.replace(', ', '').replace('(', '').replace(')', '') 
     for c in list_tech.columns
