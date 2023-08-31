@@ -27,7 +27,7 @@ st.write('You selected:', technology)
 
 objective = st.radio(
     "What is  your objective",
-    ["Learning:book", "Certification", "Build a project"])
+    ["Learning", "Certification", "Build a project"])
 
 if objective == 'Learning':
     st.write('You selected Learning.')
