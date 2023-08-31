@@ -70,7 +70,7 @@ def get_technology_list():
     return my_cur.fetchall()
 
 # Add a button to load the fruit
-if st.selectbox('Select a interested technology'):
+if st.button('Select a interested technology'):
       my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
       my_data_rows = get_technology_list()
       my_cnx.close()
@@ -82,7 +82,7 @@ technology2 = st.selectbox( 'Interested Technologies ', list(st.dataframe(my_dat
 st.write('You selected:', technology2)
 
 
-if "('Submit New Idea',)" in technology2:
+if ('Submit New Idea',) in technology2:
     yourIdea = st.text_input("Your Ideas")
     
 
