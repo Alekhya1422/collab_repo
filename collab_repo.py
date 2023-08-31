@@ -27,12 +27,8 @@ st.write('You selected:', technology)
 
 objective = st.radio(
     "What is  your objective",
-    ["Learning", "Certification", "Build a project"])
+    ["Learning:open_book:", "Certification	:medal:", "Build a project:desktop_computer:"])
 
-if objective == 'Learning':
-    st.write('You selected Learning.')
-else objective == 'Certification':
-    st.write("You selected Certification.")
 
 
 # Submit button
