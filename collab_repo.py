@@ -5,12 +5,12 @@ import pandas as pd
 # FMR logo on top - will adjust the align later
 st.image('https://www.fidelity.com/bin-public/060_www_fidelity_com/images/Fidelity-footer-logo.png')
 # Titles and headers
-st.title("Fidelity AMT Learning Days")
+st.title(":green[Fidelity AMT Learning Days]")
 st.divider()
-st.header(':green[Learning Objectives Submission Form]')
+st.header(':blue[Learning Objectives Submission Form]')
 st.caption('This tool will assist in finding associates with similar learning interests, enabling collaboration and the set up of study groups')
 st.divider()
-st.subheader('Please enter your details:')
+st.subheader(':orange[Please enter your details:]')
 
 #init session state
 if "ideasList" not in st.session_state:
