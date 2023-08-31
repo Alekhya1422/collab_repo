@@ -17,7 +17,6 @@ if "ideasList" not in st.session_state:
 # Input fields
 userName = st.text_input("Your Name", "")
 userEmail = st.text_input("Your email","")
-userIdea = st.text_area("Your learning objectives", "")
 
 technology = st.multiselect(
     'Interested Technologies ',
@@ -55,3 +54,5 @@ if st.session_state.ideasList:
     st.title("Ideas")
     for idea in st.session_state.ideasList:
         st.write(idea)
+
+st.subheader('Peploe with Similar Interests:')
