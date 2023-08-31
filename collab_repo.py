@@ -75,7 +75,17 @@ if st.button('Select a interested technology'):
   my_cnx.close()
   st.dataframe(my_data_rows) 
 
+#my_data_rows = my_data_rows.set_index('my_data_rows')
 
+
+technology2 = st.multiselect( 'Interested Technologies ',list(my_data_rows))
+
+if "Submit New Idea" in technology2:
+    yourIdea = st.text_input("Your Ideas")
+    
+
+fruits_selected = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado', 'Strawberries'])
+fruits_to_show = my_fruit_list.loc[fruits_selected]
 
 
 st.divider()
