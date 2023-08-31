@@ -14,13 +14,18 @@ st.subheader('Please enter your details:')
 if "ideasList" not in st.session_state:
     st.session_state.ideasList = []
 
+#list
+quickList = []
+
 # Input fields
 userName = st.text_input("Your Name", "")
 userEmail = st.text_input("Your email","")
-
 technology = st.multiselect(
     'Interested Technologies ',
-    ['Azure', 'Snowflake', 'AWS', 'Oracle','PowerBI', 'Tableau'])
+    ['Azure', 'Snowflake', 'AWS', 'Oracle','PowerBI', 'Tableau','Submit New Idea'])
+
+if "Submit New Idea" in technology:
+    yourIdea = st.text_input("Your Ideas")
 
 st.write('You selected:', technology)
 
@@ -37,24 +42,28 @@ else:
         if objective == 'Build a project:desktop_computer:':
             st.write('You selected Build a project.')
 
-userIdea = st.text_area("Brief your objectives", "")
+objectives = st.text_area("Brief your objectives", "")
 
 # Submit button
 if st.button("Submit"):
-    if userName and userIdea:
-        st.success("Thank you for submitting your idea!")
-        st.session_state.ideasList.append(f"{userName} : {userIdea}")
+    if userName and objectives and technology:
+        
+        for tech in technology:
+            if tech == 'Submit New Idea':
+                continue
+            quickList.append(tech)
+        st.session_state.ideasList.append(f"{userName} : Study ideas: {quickList}    My Objectives: {objectives}") 
+
+
     else:
         st.warning("Please fill in both your name and learning objectives.")
  #display ideas back to the user
 
 st.divider()
 
-st.subheader('Peploe with Similar Interests:')
+st.subheader('People with Similar Interests:')
 
 if st.session_state.ideasList:
     st.title("Ideas")
     for idea in st.session_state.ideasList:
         st.write(idea)
-
-
