@@ -84,7 +84,7 @@ if st.button('Select a interested technology'):
 
 st.divider()
 
-st.subheader('People with Similar Interests:')
+st.subheader(':orange[People with Similar Interests:]')
 
 
 
