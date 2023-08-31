@@ -21,8 +21,7 @@ userIdea = st.text_area("Your learning objectives", "")
 
 technology = st.multiselect(
     'Interested Technologies ',
-    ['Azure', 'Snowflake', 'AWS', 'Oracle'],
-    ['PowerBI', 'Tableau'])
+    ['Azure', 'Snowflake', 'AWS', 'Oracle','PowerBI', 'Tableau'])
 
 st.write('You selected:', technology)
 
