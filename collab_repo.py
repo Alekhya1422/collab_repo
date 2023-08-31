@@ -75,13 +75,10 @@ if st.button('Select a interested technology'):
       my_data_rows = get_technology_list()
       my_cnx.close()
       st.dataframe(my_data_rows) 
-    
-technology2 = st.selectbox( 'Interested Technologies ', my_data_rows)
-st.write('You selected:', technology2)
-
-
-if ('Submit New Idea',) in technology2:
-    yourIdea = st.text_input("Your Ideas")
+      technology2 = st.selectbox( 'Interested Technologies ', my_data_rows)
+      st.write('You selected:', technology2)
+        if ('Submit New Idea',) in technology2:
+            yourIdea = st.text_input("Your Ideas")
     
 
 
