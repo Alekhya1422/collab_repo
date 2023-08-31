@@ -81,10 +81,10 @@ list_tech.columns = [
     c.replace(', ', '').replace('(', '').replace(')', '') 
     for c in list_tech.columns
 ]                       
-list_tech = list_tech.set_index('technology_name')
+#list_tech = list_tech.set_index('technology_name')
 
 
-technology2 = st.selectbox( 'Interested Technologies ', list(list_tech.index))
+technology2 = st.selectbox( 'Interested Technologies ', list(list_tech))
 
 
 if "Submit New Idea" in technology2:
