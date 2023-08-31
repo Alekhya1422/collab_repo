@@ -1,5 +1,6 @@
 import streamlit as st
 import snowflake.connector
+import pandas as pd
 
 # FMR logo on top - will adjust the align later
 st.image('https://www.fidelity.com/bin-public/060_www_fidelity_com/images/Fidelity-footer-logo.png')
@@ -76,8 +77,15 @@ if st.button('Select a interested technology'):
   st.dataframe(my_data_rows) 
 
 
+df = pd.DataFreame(my_data_rows)
+df.columns = [
+    c.replace(', ', '').replace('(', '').replace(')', '') 
+    for c in df.columns
+]
+my_data_rows = df[df.columns]
 
 technology2 = st.multiselect( 'Interested Technologies ', my_data_rows)
+
 
 if "Submit New Idea" in technology2:
     yourIdea = st.text_input("Your Ideas")
