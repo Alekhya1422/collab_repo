@@ -65,7 +65,7 @@ my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 #Snowflake-related functions
 def get_technology_list():
   with my_cnx.cursor() as my_cur:
-    my_cur.execute("select * from technolgy")
+    my_cur.execute("select * from technology")
     return my_cur.fetchall()
 
 # Add a button to load the fruit
