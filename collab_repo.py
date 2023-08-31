@@ -70,15 +70,15 @@ def get_technology_list():
     return my_cur.fetchall()
 
 # Add a button to load the fruit
-if option = st.selectbox('Select a interested technology'):
-  my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-  my_data_rows = get_technology_list()
-  my_cnx.close()
-  st.dataframe(my_data_rows) 
+if st.selectbox('Select a interested technology'):
+      my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+      my_data_rows = get_technology_list()
+      my_cnx.close()
+      st.dataframe(my_data_rows) 
 
+st.write('You selected:', option)
 
-
-technology2 = st.selectbox( 'Interested Technologies ', list(my_data_rows))
+technology2 = st.selectbox( 'Interested Technologies ', list(st.dataframe(my_data_rows) ))
 st.write('You selected:', technology2)
 
 
