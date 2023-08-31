@@ -25,6 +25,10 @@ technology = st.multiselect(
 
 st.write('You selected:', technology)
 
+objective = st.radio(
+    "What's your objective",
+    ["Build Project", "Certification", "Learning"])
+
 # Submit button
 if st.button("Submit"):
     if userName and userIdea:
