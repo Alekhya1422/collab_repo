@@ -62,6 +62,20 @@ if st.button("Submit"):
 
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 
+#Snowflake-related functions
+def get_technology_list():
+  with my_cnx.cursor() as my_cur:
+    my_cur.execute("select * from technolgy")
+    return my_cur.fetchall()
+
+# Add a button to load the fruit
+if streamlit.button('Select a interested technology'):
+  my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+  my_data_rows = get_technology_list()
+  my_cnx.close()
+  streamlit.dataframe(my_data_rows) 
+
+
 
 
 st.divider()
