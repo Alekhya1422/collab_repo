@@ -77,11 +77,6 @@ if st.button('Select a interested technology'):
   st.dataframe(my_data_rows) 
 
 
-df = st.dataframe(my_data_rows)
-my_data_rows
-df.columns = [c.replace(', ', '').replace('(', '').replace(')', '')for c in df.columns]
-my_data_rows = df[df.columns]
-
 
 
 technology2 = st.selectbox( 'Interested Technologies ', my_data_rows)
