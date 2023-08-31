@@ -55,4 +55,5 @@ if st.session_state.ideasList:
     for idea in st.session_state.ideasList:
         st.write(idea)
 
+st.divider()
 st.subheader('Peploe with Similar Interests:')
