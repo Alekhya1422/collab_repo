@@ -26,10 +26,8 @@ technology = st.multiselect(
 st.write('You selected:', technology)
 
 objective = st.radio(
-    "What's your objective",
+    "What is  your objective",
     ["Apple","Learning", "Certification", "Build a project"])
-
-st.write('You selected:', objective)
 
 # Submit button
 if st.button("Submit"):
