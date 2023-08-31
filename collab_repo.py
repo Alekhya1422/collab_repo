@@ -76,15 +76,9 @@ if st.button('Select a interested technology'):
   my_cnx.close()
   st.dataframe(my_data_rows) 
 
-list_tech = st.dataframe(my_data_rows, columns = ("technology_name"))
-list_tech.columns = [
-    c.replace(', ', '').replace('(', '').replace(')', '') 
-    for c in list_tech.columns
-]                       
-#list_tech = list_tech.set_index('technology_name')
 
 
-technology2 = st.selectbox( 'Interested Technologies ', list(list_tech))
+technology2 = st.selectbox( 'Interested Technologies ', list(my_data_rows))
 
 
 if "Submit New Idea" in technology2:
