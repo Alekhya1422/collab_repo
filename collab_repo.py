@@ -1,4 +1,5 @@
 import streamlit as st
+import snowflake.connector
 
 # FMR logo on top - will adjust the align later
 st.image('https://www.fidelity.com/bin-public/060_www_fidelity_com/images/Fidelity-footer-logo.png')
