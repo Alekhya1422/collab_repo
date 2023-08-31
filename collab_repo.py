@@ -78,13 +78,12 @@ if st.button('Select a interested technology'):
 
 
 df = pd.DataFrame(my_data_rows)
-df.columns = [
-    c.replace(', ', '').replace('(', '').replace(')', '') 
-    for c in df.columns
-]
+my_data_rows= my_data_rows.astype(object)
+my_data_rows
+df.columns = [c.replace(', ', '').replace('(', '').replace(')', '')for c in df.columns]
 my_data_rows = df[df.columns]
 
-my_data_rows.dftype
+#my_data_rows.dftype
 
 my_data_rows= my_data_rows.astype(object)
 my_data_rows
