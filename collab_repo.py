@@ -7,7 +7,7 @@ st.image('https://www.fidelity.com/bin-public/060_www_fidelity_com/images/Fideli
 # Titles and headers
 st.title("Fidelity AMT Learning Days")
 st.divider()
-st.header('Learning Objectives Submission Form')
+st.header(':green[Learning Objectives Submission Form]')
 st.caption('This tool will assist in finding associates with similar learning interests, enabling collaboration and the set up of study groups')
 st.divider()
 st.subheader('Please enter your details:')
