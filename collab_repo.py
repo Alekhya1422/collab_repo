@@ -77,7 +77,7 @@ if st.button('Select a interested technology'):
 
 
 
-technology2 = st.multiselect( 'Interested Technologies ', st.dataframe(my_data_rows) )
+technology2 = st.multiselect( 'Interested Technologies ', my_data_rows)
 
 if "Submit New Idea" in technology2:
     yourIdea = st.text_input("Your Ideas")
