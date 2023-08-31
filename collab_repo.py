@@ -33,10 +33,10 @@ if objective == 'Learning:open_book:':
     st.write('You selected Learning.')
 else:
     if objective == 'Certification:medal:':
-    st.write('You selected Certification.')
+        st.write('You selected Certification.')
     else:
         if objective == 'Build a project:desktop_computer:':
-        st.write('You selected Build a project.')
+            st.write('You selected Build a project.')
 
 # Submit button
 if st.button("Submit"):
