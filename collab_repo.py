@@ -75,10 +75,10 @@ if st.button('Select a interested technology'):
   my_cnx.close()
   st.dataframe(my_data_rows) 
 
-my_data_rows = my_data_rows.set_index('technology_name')
+my_data_rows = my_data_rows.set_index('my_data_rows')
 
 
-technology2 = st.multiselect( 'Interested Technologies ',list(my_data_rows.index))
+technology2 = st.multiselect( 'Interested Technologies ',list(my_data_rows))
 
 if "Submit New Idea" in technology2:
     yourIdea = st.text_input("Your Ideas")
