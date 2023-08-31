@@ -38,6 +38,8 @@ else:
         if objective == 'Build a project:desktop_computer:':
             st.write('You selected Build a project.')
 
+userIdea = st.text_area("Brief your objectives", "")
+
 # Submit button
 if st.button("Submit"):
     if userName and userIdea:
