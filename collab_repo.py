@@ -79,9 +79,10 @@ if st.button('Select a interested technology'):
 
 
 technology2 = st.selectbox( 'Interested Technologies ', list(my_data_rows))
+st.write('You selected:', technology2)
 
 
-if "Submit New Idea" in technology2:
+if "('Submit New Idea',)" in technology2:
     yourIdea = st.text_input("Your Ideas")
     
 
