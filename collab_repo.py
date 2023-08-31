@@ -78,7 +78,7 @@ if st.button('Select a interested technology'):
 
 st.write('You selected:', option)
 
-technology2 = st.selectbox( 'Interested Technologies ', list(st.dataframe(my_data_rows) ))
+technology2 = st.selectbox( 'Interested Technologies ', my_data_rows)
 st.write('You selected:', technology2)
 
 
