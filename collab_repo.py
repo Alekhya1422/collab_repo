@@ -19,6 +19,13 @@ userName = st.text_input("Your Name", "")
 userEmail = st.text_input("Your email","")
 userIdea = st.text_area("Your learning objectives", "")
 
+technology = st.multiselect(
+    'Interested Technologies ',
+    ['Azure', 'Snowflake', 'AWS', 'Oracle'],
+    ['PowerBI', 'Tableau'])
+
+st.write('You selected:', technology)
+
 # Submit button
 if st.button("Submit"):
     if userName and userIdea:
