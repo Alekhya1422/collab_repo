@@ -84,6 +84,11 @@ df.columns = [
 ]
 my_data_rows = df[df.columns]
 
+my_data_rows.dftype
+
+my_data_rows= my_data_rows.astype(object)
+my_data_rows
+
 technology2 = st.multiselect( 'Interested Technologies ', my_data_rows)
 
 
