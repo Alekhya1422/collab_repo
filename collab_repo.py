@@ -85,13 +85,13 @@ if selected_tech_name == 'Other':
         my_cur.execute("insert into technology values ('" + technology_name + "')")
         return "Thanks for adding " + technology_name
    
-    other_tech_name = streamlit.text_input('Enter the technology name you are interested on:')
+    other_tech_name = st.text_input('Enter the technology name you are interested on:')
 
-    if streamlit.button('Add a Technology to the List'):
-      my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    if st.button('Add a Technology to the List'):
+      my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
       back_from_function = insert_row_snowflake(other_tech_name)
       my_cnx.close()
-      streamlit.text(back_from_function)
+      st.text(back_from_function)
         
     
 
