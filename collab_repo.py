@@ -22,9 +22,9 @@ quickList = []
 
 # Input fields
 userName = st.text_input("Your Name", "")
-st.write('You entered USer name : {userName}')
+st.write(f'You entered USer name : {userName}')
 userEmail = st.text_input("Your email","")
-st.write('You entered USer Email : {userEmail}')
+st.write(f'You entered USer Email : {userEmail}')
 objective = st.radio(
     "What are you interested in achieving during Learning Days?",
     ["Learning:open_book:", "Certification:medal:", "Build a project:desktop_computer:"])
@@ -73,7 +73,7 @@ selected_tech_name = st.selectbox('Select a name:', df['technology_name'])
 if selected_tech_name == 'Other':
     selected_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
 
-st.write('You have selected technology: {selected_tech_name}')
+st.write(f'You have selected technology: {selected_tech_name}')
 
 
 
