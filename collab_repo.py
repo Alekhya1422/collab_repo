@@ -83,7 +83,7 @@ if selected_tech_name == 'Other':
     def insert_row_snowflake(new_technology):
       with my_cnx.cursor() as my_cur:
         my_cur.execute("insert into technology values ('" + new_technology + "')")
-        return "Thanks for adding " :green[+ new_technology]
+        return "Thanks for adding " + new_technology
 
     try:
       other_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
