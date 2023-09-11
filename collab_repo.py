@@ -27,9 +27,9 @@ useremail = st.text_input("Your email:red[*]","")
 st.write(f'You entered User Email : {useremail}')
 selected_radio = st.radio(
     "What are you interested in achieving during Learning Days?:red[*]",
-    ["Learning:open_book:", "Certification:medal:", "Build a project:desktop_computer:"])
+    ["Learning :open_book:", "Certification :medal:", "Build a project :desktop_computer:"])
 
-if selected_radio == 'Learning:open_book:':
+if selected_radio == 'Learning :open_book:':
     objective = 'Learning'
     st.write('You selected Learning.')
     
@@ -55,7 +55,7 @@ if selected_radio == 'Learning:open_book:':
 
     st.write(f'You have selected : {selected_tech_name}')
 
-elif selected_radio == "Certification:medal:":
+elif selected_radio == "Certification :medal:":
     objective = 'Certification'
     st.write('You selected Certification.')
     
@@ -108,27 +108,7 @@ else:
 objective_description = st.text_area("Brief your objectives", "")
 st.write(f'You entered description : {objective_description}')
 
-# Establish a connection to Snowflake
-my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-
-# To display the list of Technologies
-technology_list = "select technology_name from technology"
-my_cur = my_cnx.cursor()
-my_cur.execute(technology_list)
-data = my_cur.fetchall()
-columns = [desc[0] for desc in my_cur.description]
-df = pd.DataFrame(data, columns= ['technology_name'])
-my_cur.close()
-my_cnx.close()
-
-selected_tech_name = st.selectbox('Choose Learning subject:red[*]', df['technology_name'])
-
-if selected_tech_name == 'Other':
-    selected_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
-
-st.write(f'You have selected technology: {selected_tech_name}')
-
-#Insert a record to snowflake
+#Insert a learning record to snowflake
 def insert_learning_rec_snf(username,useremail,selected_tech_name,objective,objective_description):
     try:
         my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
@@ -141,10 +121,50 @@ def insert_learning_rec_snf(username,useremail,selected_tech_name,objective,obje
         st.success("Data inserted successfully!")
     except URLError as e:
         st.error()
-        
-if st.button("Insert Data"):
+
+if st.button("Submit your Interest"):
     if username and useremail and selected_tech_name and objective:
         insert_learning_rec_snf(username,useremail,selected_tech_name,objective,objective_description)
+    else:
+        st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
+
+#Insert a certification record to snowflake
+def insert_cert_rec_snf(username,useremail,selected_cert_name,objective,objective_description):
+    try:
+        my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+        my_cur = my_cnx.cursor()
+        insert_learning_rec = f"INSERT INTO MEMBERS_LEARNING (MEMBER_NAME, MEMBER_EMAIL,CERTIFICATION_NAME,OBJECTIVE_NAME,OBJECTIVE_DESCRIPTION) VALUES ('{username}', '{useremail}','{selected_cert_name}','{objective}','{objective_description}')"
+        my_cur.execute(insert_learning_rec)
+        my_cnx.commit()
+        my_cur.close()
+        my_cnx.close()
+        st.success("Data inserted successfully!")
+    except URLError as e:
+        st.error()
+        
+if st.button("Submit your Interest"):
+    if username and useremail and selected_cert_name and objective:
+        insert_cert_rec_snf(username,useremail,selected_cert_name,objective,objective_description)
+    else:
+        st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
+
+#Insert a project record to snowflake
+def insert_project_rec_snf(username,useremail,selected_project_name,objective,objective_description):
+    try:
+        my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+        my_cur = my_cnx.cursor()
+        insert_learning_rec = f"INSERT INTO MEMBERS_LEARNING (MEMBER_NAME, MEMBER_EMAIL,PROJECT_NAME,OBJECTIVE_NAME,OBJECTIVE_DESCRIPTION) VALUES ('{username}', '{useremail}','{selected_project_name}','{objective}','{objective_description}')"
+        my_cur.execute(insert_learning_rec)
+        my_cnx.commit()
+        my_cur.close()
+        my_cnx.close()
+        st.success("Data inserted successfully!")
+    except URLError as e:
+        st.error()
+        
+if st.button("Submit your Interest"):
+    if username and useremail and selected_project_name and objective:
+        insert_project_rec_snf(username,useremail,selected_project_name,objective,objective_description)
     else:
         st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
     
