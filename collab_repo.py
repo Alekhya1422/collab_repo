@@ -81,9 +81,10 @@ my_cnx.close()
 
 
 df = pd.DataFrame(my_data_rows, columns =['technology_name']
+print(df.head())
 
-technology2 = st.radio('Interested Technologies', df['technology_name'])
-st.write('You selected:', technology2)
+#technology2 = st.radio('Interested Technologies', df['technology_name'])
+#st.write('You selected:', technology2)
 
 #selected_name = st.radio('Select a name:', df['Names'])
 
