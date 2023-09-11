@@ -66,7 +66,7 @@ if st.button("Submit"):
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 
 # Snowflake query to retrieve data from a table
-query = "select * from technology"
+query = "select technology_name from technology"
 
 # Execute the query and fetch data into a Pandas DataFrame
 my_cur = my_cnx.cursor()
@@ -77,7 +77,7 @@ data = my_cur.fetchall()
 columns = [desc[0] for desc in my_cur.description]
 
 # Create a Pandas DataFrame
-df = pd.DataFrame(data, columns=columns)
+df = pd.DataFrame(data, columns= df['technology_name'])
 
 # Close the Snowflake connection
 my_cnx.close()
