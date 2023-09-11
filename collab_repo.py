@@ -80,12 +80,12 @@ st.write(f'You have selected technology: {selected_tech_name}')
 # To Enter new technology name which is not in the above list.
 if selected_tech_name == 'Other':
 # Allow the end user to add a fruit to the list
-    def insert_row_snowflake(new_fruit):
+    def insert_row_snowflake(new_technology):
       with my_cnx.cursor() as my_cur:
-        my_cur.execute("insert into technology values ('" + technology_name + "')")
-        return "Thanks for adding " + technology_name
+        my_cur.execute("insert into technology values ('" + new_technology + "')")
+        return "Thanks for adding " + new_technology
    
-    other_tech_name = st.text_input('Enter the technology name you are interested on:')
+    other_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
 
     if st.button('Add a Technology to the List'):
       my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
