@@ -176,7 +176,7 @@ st.subheader(':orange[People with Similar Interests:]')
 # Function to fetch data from Snowflake table
 def fetch_tech_data_snf():
     try:
-        my_cnx = snowflake.connector.connect(**snowflake_config)
+        my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
         my_cur = my_cnx.cursor()
         sql_query = "SELECT * FROM MEMBERS_LEARNING"
         my_cur.execute(sql_query)
