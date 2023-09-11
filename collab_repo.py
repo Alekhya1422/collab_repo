@@ -122,12 +122,6 @@ def insert_learning_rec_snf(username,useremail,selected_tech_name,objective,obje
     except URLError as e:
         st.error()
 
-if st.button("Submit your Interest", key="submit1"):
-    if username and useremail and selected_tech_name and objective:
-        insert_learning_rec_snf(username,useremail,selected_tech_name,objective,objective_description)
-    else:
-        st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
-
 #Insert a certification record to snowflake
 def insert_cert_rec_snf(username,useremail,selected_cert_name,objective,objective_description):
     try:
@@ -141,12 +135,6 @@ def insert_cert_rec_snf(username,useremail,selected_cert_name,objective,objectiv
         st.success("Data inserted successfully!")
     except URLError as e:
         st.error()
-        
-if st.button("Submit your Interest", key="submit2"):
-    if username and useremail and selected_cert_name and objective:
-        insert_cert_rec_snf(username,useremail,selected_cert_name,objective,objective_description)
-    else:
-        st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
 
 #Insert a project record to snowflake
 def insert_project_rec_snf(username,useremail,selected_project_name,objective,objective_description):
@@ -161,12 +149,25 @@ def insert_project_rec_snf(username,useremail,selected_project_name,objective,ob
         st.success("Data inserted successfully!")
     except URLError as e:
         st.error()
-        
-if st.button("Submit your Interest", key="submit3"):
-    if username and useremail and selected_project_name and objective:
-        insert_project_rec_snf(username,useremail,selected_project_name,objective,objective_description)
-    else:
-        st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
+
+if selected_radio == "Learning :open_book:":
+    if st.button("Submit your Interest", key="submit1"):
+        if username and useremail and selected_tech_name and objective:
+            insert_learning_rec_snf(username,useremail,selected_tech_name,objective,objective_description)
+        else:
+            st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
+elif selected_radio == "Certification :medal:":       
+    if st.button("Submit your Interest", key="submit2"):
+        if username and useremail and selected_cert_name and objective:
+            insert_cert_rec_snf(username,useremail,selected_cert_name,objective,objective_description)
+        else:
+            st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
+else:
+    if st.button("Submit your Interest", key="submit3"):
+        if username and useremail and selected_project_name and objective:
+            insert_project_rec_snf(username,useremail,selected_project_name,objective,objective_description)
+        else:
+            st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
     
 
 #copy technlogy list to data frame
