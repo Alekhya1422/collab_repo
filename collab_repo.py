@@ -191,6 +191,8 @@ def fetch_tech_data_snf(selected_tech_name):
 # Streamlit app
 st.title("Display Snowflake Table Data")
 
+st.write(f'You have selected : {selected_tech_name}')
+
 # Fetch data from Snowflake
 table_data = fetch_tech_data_snf(selected_tech_name)
 
