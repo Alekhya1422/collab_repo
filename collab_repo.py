@@ -23,17 +23,8 @@ quickList = []
 # Input fields
 userName = st.text_input("Your Name", "")
 userEmail = st.text_input("Your email","")
-technology = st.multiselect(
-    'Interested Technologies ',
-    ['Azure', 'Snowflake', 'AWS', 'Oracle','PowerBI', 'Tableau','Submit New Idea'])
-
-if "Submit New Idea" in technology:
-    yourIdea = st.text_input("Your Ideas")
-
-st.write('You selected:', technology)
-
 objective = st.radio(
-    "What is  your objective",
+    "What are you interested in achieving during Learning Days?",
     ["Learning:open_book:", "Certification:medal:", "Build a project:desktop_computer:"])
 
 if objective == 'Learning:open_book:':
@@ -46,6 +37,14 @@ else:
             st.write('You selected Build a project.')
 
 objectives = st.text_area("Brief your objectives", "")
+
+selected_radio = st.radio("What are you interested in achieving during Learning Days?",
+                             ["Learning :open_book:", "Certification :medal:", "Building a project :desktop_computer:"])
+
+# Display the selected radio button's corresponding multiselect
+    if selected_radio == "Learning :open_book:":
+        st.session_state.selected_options_1 = st.multiselect("Choose Learning subject:", learningList,
+                                                             st.session_state.selected_options_1)
 
 # Submit button
 if st.button("Submit"):
@@ -75,7 +74,7 @@ columns = [desc[0] for desc in my_cur.description]
 df = pd.DataFrame(data, columns= ['technology_name'])
 my_cnx.close()
 
-selected_tech_name = st.radio('Select a name:', df['technology_name'])
+selected_tech_name = st.select('Select a name:', df['technology_name'])
 st.write(f'You have selected technology: {selected_tech_name}')
 
 # To Enter new technology name which is not in the above list.
