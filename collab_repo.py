@@ -62,45 +62,54 @@ if selected_radio in ['Learning :open_book:', 'Certification :medal:', 'Build a 
     if my_cnx:
         my_cur = my_cnx.cursor()
         table_name = "technology" if objective == "Learning" else "certification" if objective == "Certification" else "project"
-        sql_query = f"SELECT {table_name}_name FROM {table_name}"
-        my_cur.execute(sql_query)
-        data = my_cur.fetchall()
-        columns = [desc[0] for desc in my_cur.description]
-        df = pd.DataFrame(data, columns=[f'{table_name}_name'])
-        my_cur.close()
-        my_cnx.close()
+        
+        # Check if the table exists in Snowflake before executing the query
+        check_table_query = f"SHOW TABLES LIKE '{table_name.upper()}'"
+        my_cur.execute(check_table_query)
+        if my_cur.fetchone():
+            sql_query = f"SELECT {table_name}_name FROM {table_name}"
+            my_cur.execute(sql_query)
+            data = my_cur.fetchall()
+            columns = [desc[0] for desc in my_cur.description]
+            df = pd.DataFrame(data, columns=[f'{table_name}_name'])
+            my_cur.close()
+            my_cnx.close()
 
-        selected_item = st.selectbox(f'Choose {table_name.replace("_", " ").title()}:red[*]', df[f'{table_name}_name'], key="selectradio")
-        st.write(f'You have selected : {selected_item}')
+            selected_item = st.selectbox(f'Choose {table_name.replace("_", " ").title()}:red[*]', df[f'{table_name}_name'], key="selectradio")
+            st.write(f'You have selected : {selected_item}')
 
-        # Create a checkbox to add a new learning idea, certification, or project
-        add_new_idea = st.checkbox(f"Add New {table_name.replace('_', ' ').title()} Idea")
-        if add_new_idea:
-            selected_item = st.text_input(f'Your idea:point_down::')
+            # Create a checkbox to add a new learning idea, certification, or project
+            add_new_idea = st.checkbox(f"Add New {table_name.replace('_', ' ').title()} Idea")
+            if add_new_idea:
+                selected_item = st.text_input(f'Your idea:point_down::')
 
-        # User objective description input
-        objective_description = st.text_area("Brief your objectives", "")
-        st.write(f'You entered description: {objective_description}')
+            # User objective description input
+            objective_description = st.text_area("Brief your objectives", "")
+            st.write(f'You entered description: {objective_description}')
 
-        # Button to submit user interest
-        if st.button(f"Submit your Interest for {table_name.replace('_', ' ').title()}", key="submit"):
-            if username and useremail and selected_item and objective:
-                try:
-                    my_cnx = connect_to_snowflake()
-                    if my_cnx:
-                        my_cur = my_cnx.cursor()
-                        table_name = f"MEMBERS_{table_name.upper()}"
-                        insert_query = f"INSERT INTO {table_name} (MEMBER_NAME, MEMBER_EMAIL, {table_name[:-1].upper()}_NAME, OBJECTIVE_NAME, OBJECTIVE_DESCRIPTION) VALUES ('{username}', '{useremail}','{selected_item}','{objective}','{objective_description}')"
-                        my_cur.execute(insert_query)
-                        my_cnx.commit()
-                        my_cur.close()
-                        my_cnx.close()
-                        st.success("Data inserted successfully!")
-                except URLError as e:
-                    st.error("Error inserting data into Snowflake.")
-            else:
-                st.warning("Please check you have entered values in all the mandatory fields marked with :red[*].")
-
+            # Button to submit user interest
+            if st.button(f"Submit your Interest for {table_name.replace('_', ' ').title()}", key="submit"):
+                if username and useremail and selected_item and objective:
+                    try:
+                        my_cnx = connect_to_snowflake()
+                        if my_cnx:
+                            my_cur = my_cnx.cursor()
+                            table_name = f"MEMBERS_{table_name.upper()}"
+                            insert_query = f"INSERT INTO {table_name} (MEMBER_NAME, MEMBER_EMAIL, {table_name[:-1].upper()}_NAME, OBJECTIVE_NAME, OBJECTIVE_DESCRIPTION) VALUES ('{username}', '{useremail}','{selected_item}','{objective}','{objective_description}')"
+                            my_cur.execute(insert_query)
+                            my_cnx.commit()
+                            my_cur.close()
+                            my_cnx.close()
+                            st.success("Data inserted successfully!")
+                    except URLError as e:
+                        st.error("Error inserting data into Snowflake.")
+                else:
+                    st.warning("Please check you have entered values in all the mandatory fields marked with :red[*].")
+        else:
+            st.error(f"'{table_name}' table does not exist in Snowflake.")
+    else:
+        st.error("Error connecting to Snowflake.")
+        
 # Fetch and display data from Snowflake
 if selected_radio in ['Learning :open_book:', 'Certification :medal:', 'Build a project :desktop_computer:']:
     st.divider()
