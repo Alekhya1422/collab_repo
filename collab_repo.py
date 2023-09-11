@@ -30,12 +30,15 @@ objective = st.radio(
     ["Learning:open_book:", "Certification:medal:", "Build a project:desktop_computer:"])
 
 if objective == 'Learning:open_book:':
+    objective = 'Learning'
     st.write('You selected Learning.')
 else:
     if objective == 'Certification:medal:':
+        objective = 'Certification'
         st.write('You selected Certification.')
     else:
         if objective == 'Build a project:desktop_computer:':
+            objective = 'Build a project'
             st.write('You selected Build a project.')
 
 objective_description = st.text_area("Brief your objectives", "")
