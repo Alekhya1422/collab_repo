@@ -22,7 +22,7 @@ quickList = []
 
 # Input fields
 username = st.text_input("Your Name:red[*]", "")
-st.write(f'You entered USer name : {username}')
+st.write(f'You entered User name : {username}')
 useremail = st.text_input("Your email:red[*]","")
 st.write(f'You entered USer Email : {useremail}')
 objective = st.radio(
@@ -76,7 +76,7 @@ def insert_learning_rec_snf(username,useremail,selected_tech_name,objective,obje
         st.error()
         
 if st.button("Insert Data"):
-    if user_name and user_email and selected_tech_name and objective:
+    if username and useremail and selected_tech_name and objective:
         insert_learning_rec_snf(username,useremail,selected_tech_name,objective,objective_description)
     else:
         st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
