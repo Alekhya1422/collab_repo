@@ -65,7 +65,7 @@ columns = [desc[0] for desc in my_cur.description]
 df = pd.DataFrame(data, columns= ['technology_name'])
 my_cnx.close()
 
-selected_tech_name = st.select('Select a name:', df['technology_name'])
+selected_tech_name = st.selectbox('Select a name:', df['technology_name'])
 st.write(f'You have selected technology: {selected_tech_name}')
 
 # To Enter new technology name which is not in the above list.
