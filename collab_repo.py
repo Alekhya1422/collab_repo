@@ -127,8 +127,8 @@ def insert_cert_rec_snf(username,useremail,selected_cert_name,objective,objectiv
     try:
         my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
         my_cur = my_cnx.cursor()
-        insert_learning_rec = f"INSERT INTO MEMBERS_LEARNING (MEMBER_NAME, MEMBER_EMAIL,CERTIFICATION_NAME,OBJECTIVE_NAME,OBJECTIVE_DESCRIPTION) VALUES ('{username}', '{useremail}','{selected_cert_name}','{objective}','{objective_description}')"
-        my_cur.execute(insert_learning_rec)
+        insert_cert_rec = f"INSERT INTO MEMBERS_LEARNING (MEMBER_NAME, MEMBER_EMAIL,CERTIFICATION_NAME,OBJECTIVE_NAME,OBJECTIVE_DESCRIPTION) VALUES ('{username}', '{useremail}','{selected_cert_name}','{objective}','{objective_description}')"
+        my_cur.execute(insert_cert_rec)
         my_cnx.commit()
         my_cur.close()
         my_cnx.close()
@@ -141,8 +141,8 @@ def insert_project_rec_snf(username,useremail,selected_project_name,objective,ob
     try:
         my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
         my_cur = my_cnx.cursor()
-        insert_learning_rec = f"INSERT INTO MEMBERS_LEARNING (MEMBER_NAME, MEMBER_EMAIL,PROJECT_NAME,OBJECTIVE_NAME,OBJECTIVE_DESCRIPTION) VALUES ('{username}', '{useremail}','{selected_project_name}','{objective}','{objective_description}')"
-        my_cur.execute(insert_learning_rec)
+        insert_project_rec = f"INSERT INTO MEMBERS_LEARNING (MEMBER_NAME, MEMBER_EMAIL,PROJECT_NAME,OBJECTIVE_NAME,OBJECTIVE_DESCRIPTION) VALUES ('{username}', '{useremail}','{selected_project_name}','{objective}','{objective_description}')"
+        my_cur.execute(insert_project_rec)
         my_cnx.commit()
         my_cur.close()
         my_cnx.close()
