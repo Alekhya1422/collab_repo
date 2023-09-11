@@ -32,14 +32,73 @@ objective = st.radio(
 if objective == 'Learning:open_book:':
     objective = 'Learning'
     st.write('You selected Learning.')
+    # Establish a connection to Snowflake
+    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+
+    # To display the list of Technologies
+    technology_list = "select technology_name from technology"
+    my_cur = my_cnx.cursor()
+    my_cur.execute(technology_list)
+    data = my_cur.fetchall()
+    columns = [desc[0] for desc in my_cur.description]
+    df = pd.DataFrame(data, columns= ['technology_name'])
+    my_cur.close()
+    my_cnx.close()
+
+    selected_tech_name = st.selectbox('Choose Learning subject:red[*]', df['technology_name'])
+
+    if selected_tech_name == 'Other':
+        selected_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
+
+    st.write(f'You have selected technology: {selected_tech_name}')
+
 else:
     if objective == 'Certification:medal:':
         objective = 'Certification'
         st.write('You selected Certification.')
+        # Establish a connection to Snowflake
+        my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+
+        # To display the list of Technologies
+        technology_list = "select technology_name from technology"
+        my_cur = my_cnx.cursor()
+        my_cur.execute(technology_list)
+        data = my_cur.fetchall()
+        columns = [desc[0] for desc in my_cur.description]
+        df = pd.DataFrame(data, columns= ['technology_name'])
+        my_cur.close()
+        my_cnx.close()
+
+        selected_tech_name = st.selectbox('Choose Learning subject:red[*]', df['technology_name'])
+
+        if selected_tech_name == 'Other':
+            selected_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
+
+        st.write(f'You have selected technology: {selected_tech_name}')
     else:
         if objective == 'Build a project:desktop_computer:':
             objective = 'Build a project'
             st.write('You selected Build a project.')
+            # Establish a connection to Snowflake
+            my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+
+            # To display the list of Technologies
+            technology_list = "select technology_name from technology"
+            my_cur = my_cnx.cursor()
+            my_cur.execute(technology_list)
+            data = my_cur.fetchall()
+            columns = [desc[0] for desc in my_cur.description]
+            df = pd.DataFrame(data, columns= ['technology_name'])
+            my_cur.close()
+            my_cnx.close()
+
+            selected_tech_name = st.selectbox('Choose Learning subject:red[*]', df['technology_name'])
+
+            if selected_tech_name == 'Other':
+              selected_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
+
+            st.write(f'You have selected technology: {selected_tech_name}')
+
 
 objective_description = st.text_area("Brief your objectives", "")
 st.write(f'You entered description : {objective_description}')
