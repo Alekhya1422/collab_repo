@@ -83,15 +83,26 @@ if selected_tech_name == 'Other':
     def insert_row_snowflake(new_technology):
       with my_cnx.cursor() as my_cur:
         my_cur.execute("insert into technology values ('" + new_technology + "')")
-        return "Thanks for adding " + new_technology
-   
-    other_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
+        return "Thanks for adding " + :green[new_technology]
 
-    if st.button('Add a Technology to the List'):
-      my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-      back_from_function = insert_row_snowflake(other_tech_name)
-      my_cnx.close()
-      st.text(back_from_function)
+    try:
+      other_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
+      if not other_tech_name:
+        streamlit.error("Please select a technology to add to the list.")
+      else st.button('Add a Technology to the List'):
+         my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+         back_from_function = insert_row_snowflake(other_tech_name)
+         my_cnx.close()
+         st.text(back_from_function)
+    except URLError as e:
+       st.error()
+    
+
+  #  if st.button('Add a Technology to the List'):
+  #    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+   #   back_from_function = insert_row_snowflake(other_tech_name)
+   #   my_cnx.close()
+    #  st.text(back_from_function)
         
     
 
