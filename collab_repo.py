@@ -77,10 +77,7 @@ data = my_cur.fetchall()
 columns = [desc[0] for desc in my_cur.description]
 
 # Create a Pandas DataFrame
-df = pd.DataFrame(data, columns= df['technology_name'])
-
-# Select a value from the DataFrame using st.radio
-selected_name = st.radio('Select a name:', df['technology_name'])
+df = pd.DataFrame(data, columns= ['technology_name'])
 
 # Close the Snowflake connection
 my_cnx.close()
@@ -89,7 +86,7 @@ my_cnx.close()
 print(df.head())
 
 # Select a value from the DataFrame using st.radio
-#selected_name = st.radio('Select a name:', df['technology_name'])
+selected_name = st.radio('Select a name:', df['technology_name'])
 
 # Display the selected name
 st.write(f'You selected: {selected_name}')
