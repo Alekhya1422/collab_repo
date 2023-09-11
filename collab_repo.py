@@ -25,11 +25,11 @@ username = st.text_input("Your Name:red[*]", "")
 st.write(f'You entered User name : {username}')
 useremail = st.text_input("Your email:red[*]","")
 st.write(f'You entered User Email : {useremail}')
-objective = st.radio(
+selected_radio = st.radio(
     "What are you interested in achieving during Learning Days?:red[*]",
     ["Learning:open_book:", "Certification:medal:", "Build a project:desktop_computer:"])
 
-if objective == 'Learning:open_book:':
+if selected_radio == 'Learning:open_book:':
     objective = 'Learning'
     st.write('You selected Learning.')
     
