@@ -66,8 +66,13 @@ my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 #Snowflake-related functions
 def get_technology_list():
   with my_cnx.cursor() as my_cur:
-    my_cur.execute("select * from technology")
+    my_cur.execute("select technology_name from technology")
     return my_cur.fetchall()
+
+
+
+
+
 
 # Add a button to load the fruit
 if st.button('Select a interested technology'):
@@ -75,9 +80,13 @@ if st.button('Select a interested technology'):
     my_data_rows = get_technology_list()
     my_cnx.close()
     st.dataframe(my_data_rows) 
+    conn.close()
     technology2 = st.radio( 'Interested Technologies', my_data_rows)
     st.write('You selected:', technology2)
 
+#copy technlogy list to data frame
+#data = my_cur.fetchall()
+#df = pd.DataFrame(my_data_rows, columns =['technology_name']
 
 st.divider()
 
