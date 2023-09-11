@@ -75,14 +75,12 @@ def get_technology_list():
 
 
 # Add a button to load the fruit
-
-    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-    my_data_rows = get_technology_list()
-    my_cnx.close()
-    st.dataframe(my_data_rows) 
-    my_cnx.close()
-    technology2 = st.radio( 'Interested Technologies', my_data_rows)
-    st.write('You selected:', technology2)
+my_data_rows = get_technology_list()
+my_cnx.close()
+st.dataframe(my_data_rows) 
+my_cnx.close()
+technology2 = st.radio( 'Interested Technologies', my_data_rows)
+st.write('You selected:', technology2)
 
 #copy technlogy list to data frame
 #data = my_cur.fetchall()
