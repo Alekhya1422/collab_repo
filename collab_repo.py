@@ -41,21 +41,6 @@ else:
 objective_description = st.text_area("Brief your objectives", "")
 st.write(f'You entered description : {objective_description}')
 
-# Submit button
-if st.button("Submit"):
-    if userName and objectives and technology:
-        
-        for tech in technology:
-            if tech == 'Submit New Idea':
-                continue
-            quickList.append(tech)
-        st.session_state.ideasList.append(f"{userName} : Study ideas: {quickList}    My Objectives: {objectives}") 
-
-    else:
-        st.warning("Please fill in both your name and learning objectives.")
- #display ideas back to the user
-
-
 # Establish a connection to Snowflake
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 
