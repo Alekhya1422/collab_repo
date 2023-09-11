@@ -178,7 +178,7 @@ def fetch_tech_data_snf(selected_tech_name):
     try:
         my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
         my_cur = my_cnx.cursor()
-        sql_query = "SELECT MEMBER_NAME, MEMBER_EMAIL,TECHNOLOGY_NAME,OBJECTIVE_NAME,OBJECTIVE_DESCRIPTION FROM MEMBERS_LEARNING WHERE TECHNOLOGY_NAME = '{selected_tech_name}'"
+        sql_query = f"SELECT MEMBER_NAME, MEMBER_EMAIL, TECHNOLOGY_NAME, OBJECTIVE_NAME, OBJECTIVE_DESCRIPTION FROM MEMBERS_LEARNING WHERE TECHNOLOGY_NAME = '{selected_tech_name}'"
         my_cur.execute(sql_query)
         tech_data = my_cur.fetch_pandas_all()
         my_cur.close()
