@@ -78,13 +78,15 @@ def get_technology_list():
 my_data_rows = get_technology_list()
 #data = my_cur.fetchall()
 my_cnx.close()
-st.dataframe(my_data_rows) 
 
 
 df = pd.DataFrame(my_data_rows, columns =['technology_name']
 
-technology2 = st.radio( 'Interested Technologies', df['technology_name'])
+technology2 = st.radio('Interested Technologies', df['technology_name'])
 st.write('You selected:', technology2)
+
+#selected_name = st.radio('Select a name:', df['Names'])
+
 
 #copy technlogy list to data frame
 
