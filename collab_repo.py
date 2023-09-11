@@ -83,7 +83,7 @@ st.dataframe(my_data_rows)
 
 df = pd.DataFrame(my_data_rows, columns =['technology_name']
 
-technology2 = st.radio( 'Interested Technologies', df)
+technology2 = st.radio( 'Interested Technologies', df['technology_name'])
 st.write('You selected:', technology2)
 
 #copy technlogy list to data frame
