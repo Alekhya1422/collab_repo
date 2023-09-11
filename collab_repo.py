@@ -55,7 +55,7 @@ if selected_radio == 'Learning:open_book:':
 
     st.write(f'You have selected : {selected_tech_name}')
 
-elif selected_radio == "Certification :medal:":
+elif selected_radio == "Certification:medal:":
     objective = 'Certification'
     st.write('You selected Certification.')
     
@@ -98,7 +98,7 @@ else:
 
     selected_project_name = st.selectbox('Choose project type to Build:red[*]', df['project_name'], key="selectradio3")
 
-    # Create a checkbox to add a new learning idea
+    # Create a checkbox to add a new project idea
     add_new_idea = st.checkbox("Add New Project Idea")
     if add_new_idea:
             selected_project_name = st.text_input('your idea:point_down::')
