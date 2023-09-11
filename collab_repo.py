@@ -60,21 +60,21 @@ else:
         my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 
         # To display the list of Technologies
-        technology_list = "select technology_name from technology"
+        certification_list = "select technology_name from technology"
         my_cur = my_cnx.cursor()
-        my_cur.execute(technology_list)
+        my_cur.execute(certification_list)
         data = my_cur.fetchall()
         columns = [desc[0] for desc in my_cur.description]
-        df = pd.DataFrame(data, columns= ['technology_name'])
+        df = pd.DataFrame(data, columns= ['certification_name'])
         my_cur.close()
         my_cnx.close()
 
-        selected_tech_name = st.selectbox('Choose Learning subject:red[*]', df['technology_name'])
+        selected_cert_name = st.selectbox('Choose Learning subject:red[*]', df['certification_name'])
 
-        if selected_tech_name == 'Other':
-            selected_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
+        if selected_cert_name == 'Other':
+            selected_cert_name = st.text_input('Enter the Certification name you are interested on :point_down::')
 
-        st.write(f'You have selected technology: {selected_tech_name}')
+        st.write(f'You have selected technology: {selected_cert_name}')
     else:
         if objective == 'Build a project:desktop_computer:':
             objective = 'Build a project'
@@ -83,21 +83,21 @@ else:
             my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 
             # To display the list of Technologies
-            technology_list = "select technology_name from technology"
+            project_list = "select technology_name from technology"
             my_cur = my_cnx.cursor()
-            my_cur.execute(technology_list)
+            my_cur.execute(project_list)
             data = my_cur.fetchall()
             columns = [desc[0] for desc in my_cur.description]
-            df = pd.DataFrame(data, columns= ['technology_name'])
+            df = pd.DataFrame(data, columns= ['project_name'])
             my_cur.close()
             my_cnx.close()
 
-            selected_tech_name = st.selectbox('Choose Learning subject:red[*]', df['technology_name'])
+            selected_project_name = st.selectbox('Choose Learning subject:red[*]', df['project_name'])
 
-            if selected_tech_name == 'Other':
-              selected_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
+            if selected_project_name == 'Other':
+              selected_project_name = st.text_input('Enter the technology name you are interested on :point_down::')
 
-            st.write(f'You have selected technology: {selected_tech_name}')
+            st.write(f'You have selected technology: {selected_project_name}')
 
 
 objective_description = st.text_area("Brief your objectives", "")
