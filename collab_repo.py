@@ -38,14 +38,6 @@ else:
 
 objectives = st.text_area("Brief your objectives", "")
 
-selected_radio = st.radio("What are you interested in achieving during Learning Days?",
-                             ["Learning :open_book:", "Certification :medal:", "Building a project :desktop_computer:"])
-
-# Display the selected radio button's corresponding multiselect
-    if selected_radio == "Learning :open_book:":
-        st.session_state.selected_options_1 = st.multiselect("Choose Learning subject:", learningList,
-                                                             st.session_state.selected_options_1)
-
 # Submit button
 if st.button("Submit"):
     if userName and objectives and technology:
@@ -55,7 +47,6 @@ if st.button("Submit"):
                 continue
             quickList.append(tech)
         st.session_state.ideasList.append(f"{userName} : Study ideas: {quickList}    My Objectives: {objectives}") 
-
 
     else:
         st.warning("Please fill in both your name and learning objectives.")
