@@ -89,7 +89,7 @@ if selected_tech_name == 'Other':
     try:
       other_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
       if not other_tech_name:
-        streamlit.error("Please select a technology to add to the list.")
+        st.error("Please select a technology to add to the list.")
       else: 
          if st.button('Add a Technology to the List'):
              my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
