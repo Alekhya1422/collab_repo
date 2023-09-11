@@ -45,7 +45,7 @@ if objective == 'Learning:open_book:':
     my_cur.close()
     my_cnx.close()
 
-    selected_tech_name = st.selectbox('Choose Learning subject:red[*]', df['technology_name'])
+    selected_tech_name = st.selectbox('Choose Learning subject:red[*]', df['technology_name'], key="selectradio1")
 
     if selected_tech_name == 'Other':
         selected_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
@@ -69,7 +69,7 @@ else:
         my_cur.close()
         my_cnx.close()
 
-        selected_cert_name = st.selectbox('Choose Certification:red[*]', df['certification_name'])
+        selected_cert_name = st.selectbox('Choose Certification:red[*]', df['certification_name'], key="selectradio2")
 
         if selected_cert_name == 'Other':
             selected_cert_name = st.text_input('Enter the Certification name you are interested on :point_down::')
@@ -92,7 +92,7 @@ else:
             my_cur.close()
             my_cnx.close()
 
-            selected_project_name = st.selectbox('Choose project type to Build:red[*]', df['project_name'])
+            selected_project_name = st.selectbox('Choose project type to Build:red[*]', df['project_name'], key="selectradio3")
 
             if selected_project_name == 'Other':
               selected_project_name = st.text_input('Enter the technology name you are interested on :point_down::')
