@@ -66,52 +66,15 @@ df = pd.DataFrame(data, columns= ['technology_name'])
 my_cnx.close()
 
 selected_tech_name = st.selectbox('Select a name:', df['technology_name'])
+
+if selected_tech_name == 'Other':
+    selected_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
+
 st.write(f'You have selected technology: {selected_tech_name}')
 
-# To Enter new technology name which is not in the above list.
-if selected_tech_name == 'Other':
-# Allow the end user to add a fruit to the list
-    def insert_row_snowflake(new_technology):
-      with my_cnx.cursor() as my_cur:
-        my_cur.execute("insert into technology values ('" + new_technology + "')")
-        return "Thanks for adding " + new_technology
 
-    try:
-      other_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
-      if not other_tech_name:
-        st.error("Please select a technology to add to the list.")
-      else: 
-         if st.button('Add a Technology to the List'):
-             my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-             back_from_function = insert_row_snowflake(other_tech_name)
-             my_cnx.close()
-             st.text(back_from_function)
-    except URLError as e:
-       st.error()
+
     
-
-  #  if st.button('Add a Technology to the List'):
-  #    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-   #   back_from_function = insert_row_snowflake(other_tech_name)
-   #   my_cnx.close()
-    #  st.text(back_from_function)
-        
-    
-
-
-# Add a button to load the fruit
-#my_data_rows = get_technology_list()
-#data = my_cur.fetchall()
-#my_cnx.close()
-
-
-#df = pd.DataFrame(my_data_rows, columns =['technology_name']
-#print(df.head())
-
-#technology2 = st.radio('Interested Technologies', df['technology_name'])
-#st.write('You selected:', technology2)
-
-#selected_name = st.radio('Select a name:', df['Names'])
 
 
 #copy technlogy list to data frame
