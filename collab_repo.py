@@ -61,27 +61,41 @@ if st.button("Submit"):
         st.warning("Please fill in both your name and learning objectives.")
  #display ideas back to the user
 
+
+# Establish a connection to Snowflake
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 
-#Snowflake-related functions
-def get_technology_list():
-  with my_cnx.cursor() as my_cur:
-    my_cur.execute("select technology_name from technology")
-    return my_cur.fetchall()
+# Snowflake query to retrieve data from a table
+query = "select * from technology"
 
+# Execute the query and fetch data into a Pandas DataFrame
+my_cur = my_cnx.cursor()
+my_cur.execute(query)
 
+# Fetch all the data into a Pandas DataFrame
+data = my_cur.fetchall()
+columns = [desc[0] for desc in cursor.description]
+
+# Create a Pandas DataFrame
+df = pd.DataFrame(data, columns=columns)
+
+# Close the Snowflake connection
+my_cnx.close()
+
+# Display the Pandas DataFrame
+print(df.head())
 
 
 
 
 # Add a button to load the fruit
-my_data_rows = get_technology_list()
+#my_data_rows = get_technology_list()
 #data = my_cur.fetchall()
-my_cnx.close()
+#my_cnx.close()
 
 
-df = pd.DataFrame(my_data_rows, columns =['technology_name']
-print(df.head())
+#df = pd.DataFrame(my_data_rows, columns =['technology_name']
+#print(df.head())
 
 #technology2 = st.radio('Interested Technologies', df['technology_name'])
 #st.write('You selected:', technology2)
