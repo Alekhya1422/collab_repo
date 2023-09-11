@@ -74,7 +74,7 @@ my_cur.execute(query)
 
 # Fetch all the data into a Pandas DataFrame
 data = my_cur.fetchall()
-columns = [desc[0] for desc in cursor.description]
+columns = [desc[0] for desc in my_cur.description]
 
 # Create a Pandas DataFrame
 df = pd.DataFrame(data, columns=columns)
