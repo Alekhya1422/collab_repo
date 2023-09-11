@@ -53,7 +53,7 @@ if selected_radio == 'Learning:open_book:':
     if add_new_idea:
             selected_tech_name = st.text_input('your idea:point_down::')
 
-    st.write(f'You have selected technology: {selected_tech_name}')
+    st.write(f'You have selected : {selected_tech_name}')
 
 elif selected_radio == "Certification :medal:":
     objective = 'Certification'
@@ -63,7 +63,7 @@ elif selected_radio == "Certification :medal:":
     my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 
     # To display the list of Technologies
-    certification_list = "select technology_name from technology"
+    certification_list = "select certification_name from certification"
     my_cur = my_cnx.cursor()
     my_cur.execute(certification_list)
     data = my_cur.fetchall()
@@ -79,7 +79,7 @@ elif selected_radio == "Certification :medal:":
     if add_new_idea:
             selected_cert_name = st.text_input('your idea:point_down::')
 
-    st.write(f'You have selected technology: {selected_cert_name}')
+    st.write(f'You have selected : {selected_cert_name}')
 else:
     objective = 'Build a project'
     st.write('You selected Build a project.')
@@ -87,7 +87,7 @@ else:
     my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 
     # To display the list of Technologies
-    project_list = "select technology_name from technology"
+    project_list = "select project_name from project"
     my_cur = my_cnx.cursor()
     my_cur.execute(project_list)
     data = my_cur.fetchall()
@@ -103,7 +103,7 @@ else:
     if add_new_idea:
             selected_project_name = st.text_input('your idea:point_down::')
 
-    st.write(f'You have selected technology: {selected_project_name}')
+    st.write(f'You have selected : {selected_project_name}')
 
 objective_description = st.text_area("Brief your objectives", "")
 st.write(f'You entered description : {objective_description}')
