@@ -22,7 +22,9 @@ quickList = []
 
 # Input fields
 userName = st.text_input("Your Name", "")
+st.write('You entered USer name : {userName}')
 userEmail = st.text_input("Your email","")
+st.write('You entered USer Email : {userEmail}')
 objective = st.radio(
     "What are you interested in achieving during Learning Days?",
     ["Learning:open_book:", "Certification:medal:", "Build a project:desktop_computer:"])
@@ -36,7 +38,8 @@ else:
         if objective == 'Build a project:desktop_computer:':
             st.write('You selected Build a project.')
 
-objectives = st.text_area("Brief your objectives", "")
+objective_description = st.text_area("Brief your objectives", "")
+st.write('You entered description : {objective_description}')
 
 # Submit button
 if st.button("Submit"):
@@ -57,9 +60,9 @@ if st.button("Submit"):
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 
 # To display the list of Technologies
-query = "select technology_name from technology"
+technology_list = "select technology_name from technology"
 my_cur = my_cnx.cursor()
-my_cur.execute(query)
+my_cur.execute(technology_list)
 data = my_cur.fetchall()
 columns = [desc[0] for desc in my_cur.description]
 df = pd.DataFrame(data, columns= ['technology_name'])
@@ -70,7 +73,8 @@ selected_tech_name = st.selectbox('Select a name:', df['technology_name'])
 if selected_tech_name == 'Other':
     selected_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
 
-st.write(f'You have selected technology: {selected_tech_name}')
+st.write('You have selected technology: {selected_tech_name}')
+
 
 
 
