@@ -80,7 +80,7 @@ if st.button('Select a interested technology'):
     my_data_rows = get_technology_list()
     my_cnx.close()
     st.dataframe(my_data_rows) 
-    conn.close()
+    my_cnx.close()
     technology2 = st.radio( 'Interested Technologies', my_data_rows)
     st.write('You selected:', technology2)
 
