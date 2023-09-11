@@ -32,6 +32,7 @@ objective = st.radio(
 if objective == 'Learning:open_book:':
     objective = 'Learning'
     st.write('You selected Learning.')
+    
     # Establish a connection to Snowflake
     my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 
@@ -47,58 +48,62 @@ if objective == 'Learning:open_book:':
 
     selected_tech_name = st.selectbox('Choose Learning subject:red[*]', df['technology_name'], key="selectradio1")
 
-    if selected_tech_name == 'Other':
-        selected_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
+    # Create a checkbox to add a new learning idea
+    add_new_idea = st.checkbox("Add New Learning Idea")
+    if add_new_idea:
+            selected_tech_name = st.text_input('your idea:point_down::')
 
     st.write(f'You have selected technology: {selected_tech_name}')
 
+elif selected_radio == "Certification :medal:":
+    objective = 'Certification'
+    st.write('You selected Certification.')
+    
+    # Establish a connection to Snowflake
+    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+
+    # To display the list of Technologies
+    certification_list = "select technology_name from technology"
+    my_cur = my_cnx.cursor()
+    my_cur.execute(certification_list)
+    data = my_cur.fetchall()
+    columns = [desc[0] for desc in my_cur.description]
+    df = pd.DataFrame(data, columns= ['certification_name'])
+    my_cur.close()
+    my_cnx.close()
+
+    selected_cert_name = st.selectbox('Choose Certification:red[*]', df['certification_name'], key="selectradio2")
+
+    # Create a checkbox to add a new learning idea
+    add_new_idea = st.checkbox("Add New Certification Idea")
+    if add_new_idea:
+            selected_cert_name = st.text_input('your idea:point_down::')
+
+    st.write(f'You have selected technology: {selected_cert_name}')
 else:
-    if objective == 'Certification:medal:':
-        objective = 'Certification'
-        st.write('You selected Certification.')
-        # Establish a connection to Snowflake
-        my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+    objective = 'Build a project'
+    st.write('You selected Build a project.')
+    # Establish a connection to Snowflake
+    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 
-        # To display the list of Technologies
-        certification_list = "select technology_name from technology"
-        my_cur = my_cnx.cursor()
-        my_cur.execute(certification_list)
-        data = my_cur.fetchall()
-        columns = [desc[0] for desc in my_cur.description]
-        df = pd.DataFrame(data, columns= ['certification_name'])
-        my_cur.close()
-        my_cnx.close()
+    # To display the list of Technologies
+    project_list = "select technology_name from technology"
+    my_cur = my_cnx.cursor()
+    my_cur.execute(project_list)
+    data = my_cur.fetchall()
+    columns = [desc[0] for desc in my_cur.description]
+    df = pd.DataFrame(data, columns= ['project_name'])
+    my_cur.close()
+    my_cnx.close()
 
-        selected_cert_name = st.selectbox('Choose Certification:red[*]', df['certification_name'], key="selectradio2")
+    selected_project_name = st.selectbox('Choose project type to Build:red[*]', df['project_name'], key="selectradio3")
 
-        if selected_cert_name == 'Other':
-            selected_cert_name = st.text_input('Enter the Certification name you are interested on :point_down::')
+    # Create a checkbox to add a new learning idea
+    add_new_idea = st.checkbox("Add New Project Idea")
+    if add_new_idea:
+            selected_project_name = st.text_input('your idea:point_down::')
 
-        st.write(f'You have selected technology: {selected_cert_name}')
-    else:
-        if objective == 'Build a project:desktop_computer:':
-            objective = 'Build a project'
-            st.write('You selected Build a project.')
-            # Establish a connection to Snowflake
-            my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-
-            # To display the list of Technologies
-            project_list = "select technology_name from technology"
-            my_cur = my_cnx.cursor()
-            my_cur.execute(project_list)
-            data = my_cur.fetchall()
-            columns = [desc[0] for desc in my_cur.description]
-            df = pd.DataFrame(data, columns= ['project_name'])
-            my_cur.close()
-            my_cnx.close()
-
-            selected_project_name = st.selectbox('Choose project type to Build:red[*]', df['project_name'], key="selectradio3")
-
-            if selected_project_name == 'Other':
-              selected_project_name = st.text_input('Enter the technology name you are interested on :point_down::')
-
-            st.write(f'You have selected technology: {selected_project_name}')
-
+    st.write(f'You have selected technology: {selected_project_name}')
 
 objective_description = st.text_area("Brief your objectives", "")
 st.write(f'You entered description : {objective_description}')
