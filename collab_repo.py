@@ -21,12 +21,12 @@ if "ideasList" not in st.session_state:
 quickList = []
 
 # Input fields
-userName = st.text_input("Your Name", "")
-st.write(f'You entered USer name : {userName}')
-userEmail = st.text_input("Your email","")
-st.write(f'You entered USer Email : {userEmail}')
+username = st.text_input("Your Name:red[*]", "")
+st.write(f'You entered USer name : {username}')
+useremail = st.text_input("Your email:red[*]","")
+st.write(f'You entered USer Email : {useremail}')
 objective = st.radio(
-    "What are you interested in achieving during Learning Days?",
+    "What are you interested in achieving during Learning Days?:red[*]",
     ["Learning:open_book:", "Certification:medal:", "Build a project:desktop_computer:"])
 
 if objective == 'Learning:open_book:':
@@ -39,7 +39,7 @@ else:
             st.write('You selected Build a project.')
 
 objective_description = st.text_area("Brief your objectives", "")
-st.write('You entered description : {objective_description}')
+st.write(f'You entered description : {objective_description}')
 
 # Submit button
 if st.button("Submit"):
@@ -66,9 +66,10 @@ my_cur.execute(technology_list)
 data = my_cur.fetchall()
 columns = [desc[0] for desc in my_cur.description]
 df = pd.DataFrame(data, columns= ['technology_name'])
+my_cur.close()
 my_cnx.close()
 
-selected_tech_name = st.selectbox('Select a name:', df['technology_name'])
+selected_tech_name = st.selectbox('Choose Learning subject:red[*]', df['technology_name'])
 
 if selected_tech_name == 'Other':
     selected_tech_name = st.text_input('Enter the technology name you are interested on :point_down::')
@@ -77,9 +78,26 @@ st.write(f'You have selected technology: {selected_tech_name}')
 
 
 
+def insert_learning_rec_snf(username,useremail,selected_tech_name,objective,objective_description):
+try:
+    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+    my_cur = my_cnx.cursor()
+    insert_learning_rec = f"INSERT INTO MEMBERS_LEARNING (MEMBER_NAME, MEMBER_EMAIL,TECHNOLOGY_NAME,OBJECTIVE_NAME,OBJECTIVE_DESCRIPTION) 
+    VALUES ('{username}', '{useremail}','{selected_tech_name}','{objective}','{objective_description}')"
+    my_cur.execute(insert_learning_rec)
+    connection.commit()
+    my_cur.close()
+    my_cnx.close()
+    st.success("Data inserted successfully!")
+except URLError as e:
+    st.error()
 
+if st.button("Insert Data"):
+    if user_name and user_email and selected_tech_name and objective:
+        insert_learning_rec_snf(username,useremail,selected_tech_name,objective,objective_description)
+    else:
+        st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
     
-
 
 #copy technlogy list to data frame
 
