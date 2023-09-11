@@ -85,6 +85,11 @@ my_cnx.close()
 # Display the Pandas DataFrame
 print(df.head())
 
+# Select a value from the DataFrame using st.radio
+selected_name = st.radio('Select a name:', df['technology_name'])
+
+# Display the selected name
+st.write(f'You selected: {selected_name}')
 
 
 
