@@ -76,22 +76,20 @@ if selected_tech_name == 'Other':
 
 st.write(f'You have selected technology: {selected_tech_name}')
 
-
-
+#Insert a record to snowflake
 def insert_learning_rec_snf(username,useremail,selected_tech_name,objective,objective_description):
-try:
-    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-    my_cur = my_cnx.cursor()
-    insert_learning_rec = f"INSERT INTO MEMBERS_LEARNING (MEMBER_NAME, MEMBER_EMAIL,TECHNOLOGY_NAME,OBJECTIVE_NAME,OBJECTIVE_DESCRIPTION) 
-    VALUES ('{username}', '{useremail}','{selected_tech_name}','{objective}','{objective_description}')"
-    my_cur.execute(insert_learning_rec)
-    connection.commit()
-    my_cur.close()
-    my_cnx.close()
-    st.success("Data inserted successfully!")
-except URLError as e:
-    st.error()
-
+    try:
+        my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+        my_cur = my_cnx.cursor()
+        insert_learning_rec = f"INSERT INTO MEMBERS_LEARNING (MEMBER_NAME, MEMBER_EMAIL,TECHNOLOGY_NAME,OBJECTIVE_NAME,OBJECTIVE_DESCRIPTION) VALUES ('{username}', '{useremail}','{selected_tech_name}','{objective}','{objective_description}')"
+        my_cur.execute(insert_learning_rec)
+        connection.commit()
+        my_cur.close()
+        my_cnx.close()
+        st.success("Data inserted successfully!")
+    except URLError as e:
+        st.error()
+        
 if st.button("Insert Data"):
     if user_name and user_email and selected_tech_name and objective:
         insert_learning_rec_snf(username,useremail,selected_tech_name,objective,objective_description)
