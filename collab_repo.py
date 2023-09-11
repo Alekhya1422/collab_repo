@@ -199,8 +199,6 @@ if table_data is not None:
     # Display the data in a Streamlit DataFrame
     st.write("Data from Snowflake Table:")
     st.write(table_data)
-else:
-    st.warning("Data retrieval failed. Check the Snowflake connection parameters.")
 
 if st.session_state.ideasList:
     st.title("Ideas")
