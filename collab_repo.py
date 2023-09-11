@@ -65,32 +65,35 @@ if st.button("Submit"):
 # Establish a connection to Snowflake
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 
-# Snowflake query to retrieve data from a table
+# To display the list of Technologies
 query = "select technology_name from technology"
-
-# Execute the query and fetch data into a Pandas DataFrame
 my_cur = my_cnx.cursor()
 my_cur.execute(query)
-
-# Fetch all the data into a Pandas DataFrame
 data = my_cur.fetchall()
 columns = [desc[0] for desc in my_cur.description]
-
-# Create a Pandas DataFrame
 df = pd.DataFrame(data, columns= ['technology_name'])
-
-# Close the Snowflake connection
 my_cnx.close()
 
-# Display the Pandas DataFrame
-print(df.head())
+selected_tech_name = st.radio('Select a name:', df['technology_name'])
+st.write(f'You have selected technology: {selected_tech_name}')
 
-# Select a value from the DataFrame using st.radio
-selected_name = st.radio('Select a name:', df['technology_name'])
+# To Enter new technology name which is not in the above list.
+if selected_tech_name == 'Other':
+# Allow the end user to add a fruit to the list
+    def insert_row_snowflake(new_fruit):
+      with my_cnx.cursor() as my_cur:
+        my_cur.execute("insert into technology values ('" + technology_name + "')")
+        return "Thanks for adding " + technology_name
+   
+    other_tech_name = streamlit.text_input('Enter the technology name you are interested on:')
 
-# Display the selected name
-st.write(f'You selected: {selected_name}')
-
+    if streamlit.button('Add a Technology to the List'):
+      my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+      back_from_function = insert_row_snowflake(other_tech_name)
+      my_cnx.close()
+      streamlit.text(back_from_function)
+        
+    
 
 
 # Add a button to load the fruit
