@@ -24,7 +24,7 @@ quickList = []
 username = st.text_input("Your Name:red[*]", "")
 st.write(f'You entered User name : {username}')
 useremail = st.text_input("Your email:red[*]","")
-st.write(f'You entered USer Email : {useremail}')
+st.write(f'You entered User Email : {useremail}')
 objective = st.radio(
     "What are you interested in achieving during Learning Days?:red[*]",
     ["Learning:open_book:", "Certification:medal:", "Build a project:desktop_computer:"])
@@ -68,7 +68,7 @@ def insert_learning_rec_snf(username,useremail,selected_tech_name,objective,obje
         my_cur = my_cnx.cursor()
         insert_learning_rec = f"INSERT INTO MEMBERS_LEARNING (MEMBER_NAME, MEMBER_EMAIL,TECHNOLOGY_NAME,OBJECTIVE_NAME,OBJECTIVE_DESCRIPTION) VALUES ('{username}', '{useremail}','{selected_tech_name}','{objective}','{objective_description}')"
         my_cur.execute(insert_learning_rec)
-        connection.commit()
+        my_cnx.commit()
         my_cur.close()
         my_cnx.close()
         st.success("Data inserted successfully!")
