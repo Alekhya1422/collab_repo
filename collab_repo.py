@@ -169,14 +169,38 @@ else:
         else:
             st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
     
-
 #copy technlogy list to data frame
-
 st.divider()
-
 st.subheader(':orange[People with Similar Interests:]')
 
+# Function to fetch data from Snowflake table
+def fetch_tech_data_snf():
+    try:
+        my_cnx = snowflake.connector.connect(**snowflake_config)
+        my_cur = my_cnx.cursor()
+        sql_query = "SELECT * FROM MEMBERS_LEARNING"
+        my_cur.execute(sql_query)
+        tech_data = my_cur.fetch_pandas_all()
+        my_cur.close()
+        my_cnx.close()
+        return tech_data
+    except Exception as e:
+        st.error(f"Error: {e}")
+        return None
 
+# Streamlit app
+st.title("Display Snowflake Table Data")
+
+# Fetch data from Snowflake
+table_data = fetch_tech_data_snf()
+
+# Check if data retrieval was successful
+if table_data is not None:
+    # Display the data in a Streamlit DataFrame
+    st.write("Data from Snowflake Table:")
+    st.write(table_data)
+else:
+    st.warning("Data retrieval failed. Check the Snowflake connection parameters.")
 
 if st.session_state.ideasList:
     st.title("Ideas")
