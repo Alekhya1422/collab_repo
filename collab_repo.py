@@ -76,15 +76,17 @@ def get_technology_list():
 
 # Add a button to load the fruit
 my_data_rows = get_technology_list()
+#data = my_cur.fetchall()
 my_cnx.close()
 st.dataframe(my_data_rows) 
-my_cnx.close()
-technology2 = st.radio( 'Interested Technologies', my_data_rows)
+
+
+df = pd.DataFrame(my_data_rows, columns =['technology_name']
+
+technology2 = st.radio( 'Interested Technologies', df)
 st.write('You selected:', technology2)
 
 #copy technlogy list to data frame
-#data = my_cur.fetchall()
-#df = pd.DataFrame(my_data_rows, columns =['technology_name']
 
 st.divider()
 
