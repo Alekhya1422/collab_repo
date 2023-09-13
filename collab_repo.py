@@ -189,7 +189,6 @@ def fetch_tech_data_snf(selected_tech_name):
         return None
 
 # Streamlit app
-st.title("Display Snowflake Table Data")
 
 st.write(f'You have selected : {selected_tech_name}')
 
@@ -199,7 +198,6 @@ table_data = fetch_tech_data_snf(selected_tech_name)
 # Check if data retrieval was successful
 if table_data is not None and not table_data.empty:
     # Display the data in a Streamlit DataFrame
-    st.write("Data from Snowflake Table:")
     st.write(table_data)
 else:
     # Display a message when no data is found
