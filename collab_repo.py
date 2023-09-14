@@ -210,13 +210,9 @@ elif selected_radio == "Certification :medal:":
         except Exception as e:
             st.error(f"Error: {e}")
             return None
-
-# Streamlit app
-
     st.write(f'You have selected : {selected_cert_name}')
-
-# Fetch data from Snowflake
     table_data = fetch_cert_data_snf(selected_cert_name)
+    
 else:
     def fetch_project_data_snf(selected_project_name):
         try:
