@@ -188,7 +188,9 @@ if selected_radio == 'Learning :open_book:':
         except Exception as e:
             st.error(f"Error: {e}")
         return None
-
+    
+    st.write(f'You have selected : {selected_tech_name}')
+    table_data = fetch_cert_data_snf(selected_tech_name)
 
 elif selected_radio == "Certification :medal:":
     def fetch_tech_data_snf(selected_cert_name):
@@ -204,6 +206,7 @@ elif selected_radio == "Certification :medal:":
         except Exception as e:
             st.error(f"Error: {e}")
             return None
+    
     st.write(f'You have selected : {selected_cert_name}')
     table_data = fetch_cert_data_snf(selected_cert_name)
     
@@ -221,19 +224,9 @@ else:
         except Exception as e:
             st.error(f"Error: {e}")
             return None
-
-# Streamlit app
-
+   
     st.write(f'You have selected : {selected_project_name}')
-
-# Fetch data from Snowflake
     table_data = fetch_project_data_snf(selected_project_name)
-
-
-
-
-st.write(f'You have selected : {selected_tech_name}')
-table_data = fetch_cert_data_snf(selected_tech_name)
 
 # Check if data retrieval was successful
 if table_data is not None and not table_data.empty:
