@@ -151,19 +151,19 @@ def insert_project_rec_snf(username,useremail,selected_project_name,objective,ob
         st.error()
 
 if selected_radio == "Learning :open_book:":
-    if st.button("Submit your Interest1", key="submit1"):
+    if st.button("Submit your Interest", key="submit1"):
         if username and useremail and selected_tech_name and objective:
             insert_learning_rec_snf(username,useremail,selected_tech_name,objective,objective_description)
         else:
             st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
 elif selected_radio == "Certification :medal:":       
-    if st.button("Submit your Interest2", key="submit2"):
+    if st.button("Submit your Interest", key="submit2"):
         if username and useremail and selected_cert_name and objective:
             insert_cert_rec_snf(username,useremail,selected_cert_name,objective,objective_description)
         else:
             st.warning("Please check you have entered the values in all the mandatory fields marked with :red[*].")
 else:
-    if st.button("Submit your Interest3", key="submit3"):
+    if st.button("Submit your Interest", key="submit3"):
         if username and useremail and selected_project_name and objective:
             insert_project_rec_snf(username,useremail,selected_project_name,objective,objective_description)
         else:
