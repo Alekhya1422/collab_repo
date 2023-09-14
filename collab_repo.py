@@ -173,69 +173,71 @@ else:
 st.divider()
 st.subheader(':orange[People with Similar Interests:]')
 
+if selected_radio == 'Learning :open_book:':
 # Function to fetch data from Snowflake table
-def fetch_tech_data_snf(selected_tech_name):
-    try:
-        my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-        my_cur = my_cnx.cursor()
-        sql_query = f"SELECT MEMBER_NAME, MEMBER_EMAIL, TECHNOLOGY_NAME, OBJECTIVE_NAME, OBJECTIVE_DESCRIPTION FROM MEMBERS_LEARNING WHERE TECHNOLOGY_NAME = '{selected_tech_name}'"
-        my_cur.execute(sql_query)
-        tech_data = my_cur.fetch_pandas_all()
-        my_cur.close()
-        my_cnx.close()
-        return tech_data
-    except Exception as e:
-        st.error(f"Error: {e}")
-        return None
+    def fetch_tech_data_snf(selected_tech_name):
+        try:
+            my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+            my_cur = my_cnx.cursor()
+            sql_query = f"SELECT MEMBER_NAME, MEMBER_EMAIL, TECHNOLOGY_NAME, OBJECTIVE_NAME, OBJECTIVE_DESCRIPTION FROM MEMBERS_LEARNING WHERE TECHNOLOGY_NAME = '{selected_tech_name}'"
+            my_cur.execute(sql_query)
+            tech_data = my_cur.fetch_pandas_all()
+            my_cur.close()
+            my_cnx.close()
+            return tech_data
+        except Exception as e:
+             st.error(f"Error: {e}")
+            return None
 
 # Streamlit app
 
-st.write(f'You have selected : {selected_tech_name}')
+    st.write(f'You have selected : {selected_tech_name}')
 
 # Fetch data from Snowflake
-table_data = fetch_cert_data_snf(selected_tech_name)
+    table_data = fetch_cert_data_snf(selected_tech_name)
 
-def fetch_tech_data_snf(selected_cert_name):
-    try:
-        my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-        my_cur = my_cnx.cursor()
-        sql_query = f"SELECT MEMBER_NAME, MEMBER_EMAIL, TECHNOLOGY_NAME, OBJECTIVE_NAME, OBJECTIVE_DESCRIPTION FROM MEMBERS_LEARNING WHERE TECHNOLOGY_NAME = '{selected_cert_name}'"
-        my_cur.execute(sql_query)
-        tech_data = my_cur.fetch_pandas_all()
-        my_cur.close()
-        my_cnx.close()
-        return tech_data
-    except Exception as e:
-        st.error(f"Error: {e}")
-        return None
+elif selected_radio == "Certification :medal:":
+    def fetch_tech_data_snf(selected_cert_name):
+        try:
+            my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+            my_cur = my_cnx.cursor()
+            sql_query = f"SELECT MEMBER_NAME, MEMBER_EMAIL, TECHNOLOGY_NAME, OBJECTIVE_NAME, OBJECTIVE_DESCRIPTION FROM MEMBERS_LEARNING WHERE TECHNOLOGY_NAME = '{selected_cert_name}'"
+             my_cur.execute(sql_query)
+            tech_data = my_cur.fetch_pandas_all()
+            my_cur.close()
+            my_cnx.close()
+            return tech_data
+        except Exception as e:
+            st.error(f"Error: {e}")
+            return None
 
 # Streamlit app
 
-st.write(f'You have selected : {selected_cert_name}')
+    st.write(f'You have selected : {selected_cert_name}')
 
 # Fetch data from Snowflake
-table_data = fetch_cert_data_snf(selected_cert_name)
-
-def fetch_project_data_snf(selected_project_name):
-    try:
-        my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-        my_cur = my_cnx.cursor()
-        sql_query = f"SELECT MEMBER_NAME, MEMBER_EMAIL, TECHNOLOGY_NAME, OBJECTIVE_NAME, OBJECTIVE_DESCRIPTION FROM MEMBERS_LEARNING WHERE TECHNOLOGY_NAME = '{selected_project_name}'"
-        my_cur.execute(sql_query)
-        tech_data = my_cur.fetch_pandas_all()
-        my_cur.close()
-        my_cnx.close()
-        return tech_data
-    except Exception as e:
-        st.error(f"Error: {e}")
-        return None
+    table_data = fetch_cert_data_snf(selected_cert_name)
+else:
+    def fetch_project_data_snf(selected_project_name):
+        try:
+            my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+            my_cur = my_cnx.cursor()
+            sql_query = f"SELECT MEMBER_NAME, MEMBER_EMAIL, TECHNOLOGY_NAME, OBJECTIVE_NAME, OBJECTIVE_DESCRIPTION FROM MEMBERS_LEARNING WHERE TECHNOLOGY_NAME = '{selected_project_name}'"
+            my_cur.execute(sql_query)
+            tech_data = my_cur.fetch_pandas_all()
+            my_cur.close()
+            my_cnx.close()
+            return tech_data
+        except Exception as e:
+            st.error(f"Error: {e}")
+            return None
 
 # Streamlit app
 
-st.write(f'You have selected : {selected_project_name}')
+    st.write(f'You have selected : {selected_project_name}')
 
 # Fetch data from Snowflake
-table_data = fetch_project_data_snf(selected_project_name)
+    table_data = fetch_project_data_snf(selected_project_name)
 
 # Check if data retrieval was successful
 if table_data is not None and not table_data.empty:
