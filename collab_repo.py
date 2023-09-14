@@ -189,12 +189,6 @@ if selected_radio == 'Learning :open_book:':
             st.error(f"Error: {e}")
         return None
 
-# Streamlit app
-
-    st.write(f'You have selected : {selected_tech_name}')
-
-# Fetch data from Snowflake
-    table_data = fetch_cert_data_snf(selected_tech_name)
 
 elif selected_radio == "Certification :medal:":
     def fetch_tech_data_snf(selected_cert_name):
@@ -236,6 +230,14 @@ else:
     table_data = fetch_project_data_snf(selected_project_name)
 
 
+
+
+# Streamlit app
+
+    st.write(f'You have selected : {selected_tech_name}')
+
+# Fetch data from Snowflake
+    table_data = fetch_cert_data_snf(selected_tech_name)
 # Check if data retrieval was successful
 if table_data is not None and not table_data.empty:
     # Display the data in a Streamlit DataFrame
