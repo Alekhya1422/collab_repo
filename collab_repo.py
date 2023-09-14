@@ -239,6 +239,7 @@ else:
 # Fetch data from Snowflake
     table_data = fetch_project_data_snf(selected_project_name)
 
+
 # Check if data retrieval was successful
 if table_data is not None and not table_data.empty:
     # Display the data in a Streamlit DataFrame
