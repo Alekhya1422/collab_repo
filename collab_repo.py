@@ -232,12 +232,9 @@ else:
 
 
 
-# Streamlit app
+st.write(f'You have selected : {selected_tech_name}')
+table_data = fetch_cert_data_snf(selected_tech_name)
 
-    st.write(f'You have selected : {selected_tech_name}')
-
-# Fetch data from Snowflake
-    table_data = fetch_cert_data_snf(selected_tech_name)
 # Check if data retrieval was successful
 if table_data is not None and not table_data.empty:
     # Display the data in a Streamlit DataFrame
