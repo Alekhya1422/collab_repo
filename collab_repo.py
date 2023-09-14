@@ -186,8 +186,8 @@ if selected_radio == 'Learning :open_book:':
             my_cnx.close()
             return tech_data
         except Exception as e:
-             st.error(f"Error: {e}")
-            return None
+            st.error(f"Error: {e}")
+        return None
 
 # Streamlit app
 
