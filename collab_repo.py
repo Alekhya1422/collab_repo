@@ -190,19 +190,19 @@ if selected_radio == 'Learning :open_book:':
         return None
     
     st.write(f'You have selected : {selected_tech_name}')
-    table_data = fetch_cert_data_snf(selected_tech_name)
+    table_data = fetch_tech_data_snf(selected_tech_name)
 
 elif selected_radio == "Certification :medal:":
-    def fetch_tech_data_snf(selected_cert_name):
+    def fetch_cert_data_snf(selected_cert_name):
         try:
             my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
             my_cur = my_cnx.cursor()
             sql_query = f"SELECT MEMBER_NAME, MEMBER_EMAIL, TECHNOLOGY_NAME, OBJECTIVE_NAME, OBJECTIVE_DESCRIPTION FROM MEMBERS_LEARNING WHERE TECHNOLOGY_NAME = '{selected_cert_name}'"
             my_cur.execute(sql_query)
-            tech_data = my_cur.fetch_pandas_all()
+            cert_data = my_cur.fetch_pandas_all()
             my_cur.close()
             my_cnx.close()
-            return tech_data
+            return cert_data
         except Exception as e:
             st.error(f"Error: {e}")
             return None
@@ -217,10 +217,10 @@ else:
             my_cur = my_cnx.cursor()
             sql_query = f"SELECT MEMBER_NAME, MEMBER_EMAIL, TECHNOLOGY_NAME, OBJECTIVE_NAME, OBJECTIVE_DESCRIPTION FROM MEMBERS_LEARNING WHERE TECHNOLOGY_NAME = '{selected_project_name}'"
             my_cur.execute(sql_query)
-            tech_data = my_cur.fetch_pandas_all()
+            project_data = my_cur.fetch_pandas_all()
             my_cur.close()
             my_cnx.close()
-            return tech_data
+            return project_data
         except Exception as e:
             st.error(f"Error: {e}")
             return None
